@@ -5,7 +5,8 @@
 - node_moduls: `npm install`
 
 - `main.js`-ben (import bootstrap, icons):
-```js (main.js)
+```js
+//main.js
 //Bootstrap: css, js
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
