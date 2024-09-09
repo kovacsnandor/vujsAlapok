@@ -3,7 +3,6 @@
 - bootstrap: `npm i bootstrap@5.3.3`
 - icons: `npm i bootstrap-icons`
 - node_moduls: `npm install`
-
 - `main.js`-ben (import bootstrap, icons):
 ```js
 //main.js
