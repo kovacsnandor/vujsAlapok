@@ -1,5 +1,6 @@
 # Környezet telepítése
 branch: 01_adatkotes_data
+
 - vite: `npm create vue@latest`
 - bootstrap: `npm i bootstrap@5.3.3`
 - icons: `npm i bootstrap-icons`
