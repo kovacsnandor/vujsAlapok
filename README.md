@@ -1,4 +1,6 @@
 # Környezet telepítése
+branch: 01_adatkotes_data
+
 - vite: `npm create vue@latest`
 - bootstrap: `npm i bootstrap@5.3.3`
 - icons: `npm i bootstrap-icons`
@@ -12,12 +14,3 @@ import "bootstrap"
 //Icons: css
 import "bootstrap-icons/font/bootstrap-icons.min.css"
 ```
-
-
-
-# Adatkötés
-branch: 01_adatkotes_data
-
-
-# Todo
-branch: 02_todo
