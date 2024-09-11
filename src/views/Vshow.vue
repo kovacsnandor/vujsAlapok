@@ -1,16 +1,25 @@
 <template>
   <div>
     <h2>v-show</h2>
-    <transition name="fade" mode="out-in">
-      <div class="alert alert-primary my-animate" role="alert" v-show="show">
+      <!-- v-show -->
+      <div id="alert1" class="alert alert-primary" role="alert" v-show="show1">
         <div class="d-flex justify-content-between">
-          <span>A simple primary alert—check it out!</span>
+          <span>eltüntetés v-show-val. Ilyenkor csak a láthatóság tűnik el, marad a DOM-ban!</span>
           <span class="my-cursor-pointer">
-            <i class="bi bi-x-lg" @click="Close()"></i>
+            <i class="bi bi-x-lg" @click="Close1()"></i>
           </span>
         </div>
       </div>
-    </transition>
+      <!-- v-if -->
+      <div id="alert2" class="alert alert-success" role="alert" v-if="show2">
+        <div class="d-flex justify-content-between">
+          <span>eltüntetés v-if-el. Ilyenkor kiveszi DOM-ból!</span>
+          <span class="my-cursor-pointer">
+            <i class="bi bi-x-lg" @click="Close2()"></i>
+          </span>
+        </div>
+      </div>
+
   </div>
 </template>
 
@@ -20,12 +29,16 @@ import { useHost } from "vue";
 export default {
   data() {
     return {
-      show: true,
+      show1: true,
+      show2: true,
     };
   },
   methods: {
-    Close() {
-      this.show = false;
+    Close1() {
+      this.show1 = false;
+    },
+    Close2() {
+      this.show2 = false;
     },
   },
 };

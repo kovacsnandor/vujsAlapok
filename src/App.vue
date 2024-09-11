@@ -10,6 +10,8 @@ import { RouterLink, RouterView } from "vue-router";
       <RouterLink to="/databind">Data Bind</RouterLink> | 
       <RouterLink to="/vif">v-if</RouterLink> | 
       <RouterLink to="/vshow">v-show</RouterLink> | 
+      <RouterLink to="/vfor">v-for</RouterLink> | 
+      <RouterLink to="/von">v-on</RouterLink> | 
     </nav>
     <RouterView class="my-border p-2" />
   </div>
