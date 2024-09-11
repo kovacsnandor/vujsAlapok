@@ -13,6 +13,7 @@ import { RouterLink, RouterView } from "vue-router";
       <RouterLink to="/vfor">v-for</RouterLink> | 
       <RouterLink to="/von">v-on</RouterLink> | 
       <RouterLink to="/cssbinding">css binding</RouterLink> | 
+      <RouterLink to="/computed">Computed</RouterLink> | 
     </nav>
     <RouterView class="my-border p-2" />
   </div>
