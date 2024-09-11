@@ -43,6 +43,11 @@ const router = createRouter({
       path: '/computed',
       name: 'computed',
       component: () => import('../views/Computed.vue')
+    },
+    {
+      path: '/watch',
+      name: 'watch',
+      component: () => import('../views/Watch.vue')
     }
   ]
 })

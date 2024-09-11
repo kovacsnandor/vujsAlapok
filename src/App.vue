@@ -14,8 +14,11 @@ import { RouterLink, RouterView } from "vue-router";
       <RouterLink to="/von">v-on</RouterLink> | 
       <RouterLink to="/cssbinding">css binding</RouterLink> | 
       <RouterLink to="/computed">Computed</RouterLink> | 
+      <RouterLink to="/watch">Watch</RouterLink> | 
     </nav>
-    <RouterView class="my-border p-2" />
+    <div class="my-border p-2" >
+      <RouterView />
+    </div>
   </div>
 </template>
 
