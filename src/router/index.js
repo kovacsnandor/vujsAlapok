@@ -33,6 +33,11 @@ const router = createRouter({
       path: '/von',
       name: 'von',
       component: () => import('../views/Von.vue')
+    },
+    {
+      path: '/cssbinding',
+      name: 'cssbinding',
+      component: () => import('../views/Cssbinding.vue')
     }
   ]
 })
