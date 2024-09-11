@@ -1,0 +1,11 @@
+nev;osztaly;atlag
+pisti;3a;4,7
+béla;1a;3,7
+anna;1a;4,2
+jenő;2a;2,7
+áron;1a;4,3
+feri;2a;3,3
+áron;2a;3,3
+emese;1a;2,9
+áron;1b;4,8
+évi;3a;2,7
