@@ -29,16 +29,23 @@
   </div>
 
   <h3>Buborékolás</h3>
-  <p>Buborékolás (bubbling): A gyerek elem eseménye esemény a szülő elemen is kiváltódik. Terjed felfelé mint a buborék </p>
+  <p>
+    Buborékolás (bubbling): A gyerek elem eseménye esemény a szülő elemen is
+    kiváltódik. Terjed felfelé mint a buborék
+  </p>
+  <!-- szülő -->
   <button type="button" class="btn btn-danger btn-lg mb-4" @:click="counter()">
     {{ count }}
+    <!-- gyerek click kiváltja a szülő clic-ket -->
     <button type="button" class="btn btn-success p-2" @:click="counter()">
       {{ count }}
     </button>
   </button>
-  <p>A .stop-al letilthatjuk a buborékolást </p>
+  <p>A .stop-al letilthatjuk a buborékolást</p>
+  <!-- szülő -->
   <button type="button" class="btn btn-primary btn-lg" @:click="counter()">
     {{ count }}
+    <!-- gyerek click.stop nem terjed tovább a szülő felé -->
     <button type="button" class="btn btn-success p-2" @:click.stop="counter()">
       {{ count }}
     </button>
