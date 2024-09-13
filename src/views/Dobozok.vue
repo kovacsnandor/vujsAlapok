@@ -3,7 +3,8 @@
     <h2>Dobozok</h2>
 
     <p>
-      Egyirányú kommunkiáció: szülő -> gyerek
+      Egyirányú kommunkiáció: szülő -> gyerek. <br>
+      A props-okat (tulajdonságokat) használjuk fel az üzenetek továbbítására
     </p>
 
     <div class="mb-3">
