@@ -11,7 +11,13 @@ const router = createRouter({
     },
     {
       path: '/szulo2gyerek',
+      name: 'szulo2gyerek',
       component: () => import('../views/Szulo2Gyerek.vue')
+    },
+    {
+      path: '/szuloodavisszagyerek',
+      name: 'szuloodavisszagyerek',
+      component: () => import('../views/SzuloOdaVisszaGyerek.vue')
     },
     
   ]
