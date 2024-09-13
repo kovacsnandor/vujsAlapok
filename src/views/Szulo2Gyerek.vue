@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Dobozok</h2>
+    <h2>Szülő -> Gyerek kommunikáció</h2>
 
     <p>
       Egyirányú kommunkiáció: szülő -> gyerek. <br>
