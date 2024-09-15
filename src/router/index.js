@@ -19,6 +19,11 @@ const router = createRouter({
       name: 'szuloodavisszagyerek',
       component: () => import('../views/SzuloOdaVisszaGyerek.vue')
     },
+    {
+      path: '/gyerek2gyerek',
+      name: 'gyerek2gyerek',
+      component: () => import('../views/Gyerek2gyerek.vue')
+    },
     
   ]
 })
