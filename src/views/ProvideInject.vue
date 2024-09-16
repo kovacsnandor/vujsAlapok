@@ -1,6 +1,6 @@
 <template>
     <h1>Provide/Inject</h1>
-    <p>Ez olyan hogy adom (provide: hidetem), és vigye (inject: befogadom), akinek kell.</p>
+    <p>Ez olyan hogy adom (provide: hidetem), és vigye (inject: befogadom), akinek kell</p>
     <p>A Provide/Inject egyirányú kommunikáció a komponensek között</p>
     <button type="button" class="btn btn-primary"
         @click="onClickSzamlalo()"
