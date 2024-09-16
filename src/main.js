@@ -16,6 +16,8 @@ import "bootstrap-icons/font/bootstrap-icons.min.css"
 const emitter = mitt()
 const app = createApp(App)
 
+app.provide('url', 'http://localhost:3000')
+
 app.use(createPinia())
 app.use(router)
 
