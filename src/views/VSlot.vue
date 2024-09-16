@@ -1,7 +1,8 @@
 <template>
   <h2>Vslot</h2>
   <h3>Halkártyák</h3>
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <!-- Hal kártyák -->
+  <div class="row row-cols-1 row-cols-md-3 g-4 my-border mt-3 m-0">
     <HalKartya
       v-for="(hal, i) in halak"
       :key="i"
@@ -9,13 +10,23 @@
       @reszletekModalKezeles="reszletekModalKezelo"
     >
       <template v-slot:image>
-        <img :src="hal.image" class="card-img-top" :alt="hal.title" />
+        <img :src="hal.image" class="card-img-top p-2" :alt="hal.title" />
       </template>
       <template v-slot:title>
         <h5 class="card-title">{{ hal.title }}</h5>
       </template>
     </HalKartya>
   </div>
+
+  <!-- HalInfo modális ablak -->
+  <HalInfo
+    :title="kivalasztottHal.title"
+  >
+    <!-- Ez megy a slot-ba -->
+    <img class="float-start me-1 col-12 col-sm-6 col-lg-4 p-2 my-picture"  :src="kivalasztottHal.image" :alt="kivalasztottHal.title">
+    <div v-html="textFormat"></div>    
+  </HalInfo>
+
 </template>
 
 <script>
@@ -28,13 +39,15 @@ class Hal {
   }
 }
 import HalKartya from "@/componentsHalak/HalKartya.vue";
+import HalInfo from "@/componentsHalak/HalInfo.vue";
 export default {
   components: {
     HalKartya,
+    HalInfo
   },
   data() {
     return {
-      kivalsztottHal: new Hal(),
+      kivalasztottHal: new Hal(),
       halak: [
         {
           id: 1,
@@ -98,15 +111,25 @@ export default {
   },
   methods: {
     reszletekModalKezelo(data) {
-      this.kivalsztottHal = this.halak.filter((hal) => {
-        
+      this.kivalasztottHal = this.halak.filter((hal) => {
         return hal.id == data.id;
       })[0];
-      console.log(this.kivalsztottHal);
-      
-      
     },
   },
+  computed: {
+    textFormat(){
+      
+      if (this.kivalasztottHal.text==null) {
+        return '<p></p>';
+      }
+      const textArray = this.kivalasztottHal.text.map((paragraph)=>{
+        return `<p class='m-0'>${paragraph}</p>`;
+      })
+      const text = textArray.join('');
+      
+      return text
+    }
+  }
 };
 </script>
 

@@ -2,24 +2,24 @@
   <div class="col">
     <div class="card">
       <!-- <img src="..." class="card-img-top" alt="..." /> -->
-       <slot name="image"></slot>
-       
-       <div class="card-body">
-          <slot name="title"></slot>
+      <slot name="image"></slot>
 
+      <div class="card-body">
+        <slot name="title"></slot>
         <!-- <h5 class="card-title">Card title</h5>
         <p class="card-text">
           This is a longer card with supporting text below as a natural lead-in
           to additional content. This content is a little bit longer.
         </p> -->
-        <button 
-            type="button" 
-            class="btn btn-primary"
-            @click="onClickReszletek()"
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="onClickReszletek()"
+          data-bs-toggle="modal"
+          data-bs-target="#halInfoModal"
         >
-            Részletek
+          Részletek
         </button>
-
       </div>
     </div>
   </div>
@@ -27,13 +27,12 @@
 
 <script>
 export default {
-    props: ['id'],
-    methods: {
-        onClickReszletek(){
-            this.$emit("reszletekModalKezeles", {id:this.id});
-        }
-    }
-
+  props: ["id"],
+  methods: {
+    onClickReszletek() {
+      this.$emit("reszletekModalKezeles", { id: this.id });
+    },
+  },
 };
 </script>
 
