@@ -10,8 +10,19 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/about',
-      component: () => import('../views/About.vue')
+      path: '/globallocalcomponent',
+      name: 'dinamikusKomponens',
+      component: () => import('../views/GlobalLocalComponens.vue')
+    },
+    {
+      path: '/dinamikuskomponens',
+      name: 'dinamikuskomponens',
+      component: () => import('../views/DinamikusKomponens.vue')
+    },
+    {
+      path: '/slots',
+      name: 'slots',
+      component: () => import('../views/Slots.vue')
     },
     
   ]
