@@ -7,7 +7,7 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">{{ title }}</h1>
@@ -30,7 +30,14 @@
           >
             {{ no }}
           </button>
-          <button type="button" class="btn btn-primary">{{ yes }}</button>
+          <button 
+            type="button" 
+            class="btn btn-danger" 
+            data-bs-dismiss="modal"
+            @click="onClicYesButton()"
+            >
+            {{ yes }}
+          </button>
         </div>
       </div>
     </div>
@@ -40,6 +47,11 @@
 <script>
 export default {
   props: ["title", "yes", "no"],
+  methods: {
+    onClicYesButton(){
+      this.$emit("szovegEltuntetes")
+    }
+  }
 };
 </script>
 

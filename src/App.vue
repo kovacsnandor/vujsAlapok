@@ -10,6 +10,7 @@ import { RouterLink, RouterView } from "vue-router";
       <RouterLink to="/globallocalcomponent">Globális-Lokális komponensek</RouterLink> | 
       <RouterLink to="/dinamikuskomponens">Dinamikus komponensek</RouterLink> | 
       <RouterLink to="/slots">Slots</RouterLink> | 
+      <RouterLink to="/vslot">v-slot</RouterLink> | 
     </nav>
     <div class="my-border p-2" >
       <RouterView />

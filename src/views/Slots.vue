@@ -1,6 +1,10 @@
 <template>
   <h1>Slots</h1>
 
+  <p v-if="openSzoveg">
+    Ez egy szöveg, amit "Szöveg eltüntet" gombbal el lehet tüntetni
+  </p>
+
   <!-- Üzenet stat -->
   <button type="button" class="btn btn-danger" @click="openAlert = true">
     Hibaüzenet
@@ -14,7 +18,8 @@
     data-bs-toggle="modal"
     data-bs-target="#exampleModal"
   >
-    Valóban ezt akarja?
+    <span v-if="openSzoveg">Szöveg eltüntet</span>
+    <span v-if="!openSzoveg">Szöveg megjelenít</span>
   </button>
 
   <!-- Üzenet komponens -->
@@ -27,8 +32,14 @@
   </KomponensAlert>
 
   <!-- Modal komponens -->
-  <Modal :title="'Kérdés'" :yes="'Igen'" :no="'Nem'"> 
-    <p>Valóban törölni akarja?</p>
+  <Modal 
+    :title="'Kérdés'" 
+    :yes="'Igen'" 
+    :no="'Ne'"
+    @szovegEltuntetes="szovegEltuntet"
+    >
+    <p v-if="openSzoveg">Valóban eltüntessem a szöveget?</p>
+    <p v-if="!openSzoveg">Megjelenítsem a szöveget?</p>
   </Modal>
 </template>
 
@@ -42,12 +53,16 @@ export default {
   data() {
     return {
       openAlert: false,
+      openSzoveg: true,
     };
   },
   methods: {
     //Saját esemény (closeAlert) eseménykezelő függvénye
     closeAlert() {
       this.openAlert = false;
+    },
+    szovegEltuntet() {
+      this.openSzoveg = !this.openSzoveg;
     },
   },
 };
