@@ -32,7 +32,7 @@ const router = createRouter({
     {
       path: '/von',
       name: 'von',
-      component: () => import('../views/Von.vue')
+      component: () => import('../views/VOn.vue')
     },
     {
       path: '/cssbinding',
@@ -48,6 +48,11 @@ const router = createRouter({
       path: '/watch',
       name: 'watch',
       component: () => import('../views/Watch.vue')
+    },
+    {
+      path: '/animacio',
+      name: 'animacio',
+      component: () => import('../views/Animacio.vue')
     }
   ]
 })

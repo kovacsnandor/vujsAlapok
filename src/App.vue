@@ -15,6 +15,7 @@ import { RouterLink, RouterView } from "vue-router";
       <RouterLink to="/cssbinding">css binding</RouterLink> | 
       <RouterLink to="/computed">Computed</RouterLink> | 
       <RouterLink to="/watch">Watch</RouterLink> | 
+      <RouterLink to="/animacio">Animáció</RouterLink> | 
     </nav>
     <div class="my-border p-2" >
       <RouterView />
