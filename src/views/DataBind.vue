@@ -2,7 +2,7 @@
   <div>
     <h2>Adatkötés</h2>
     <p>
-      {{ szoveg }} | {{ lista }} | Kenyér: {{ kenyer }}, Kifli: {{ kifli }} |
+      {{ szoveg }} | {{ lista }} | {{listaTobbszoros}} | Kenyér: {{ kenyer }}, Kifli: {{ kifli }} |
       {{ neme }} | {{ range }}
     </p>
     <div class="mb-3">
@@ -19,6 +19,23 @@
       <option value="1">One</option>
       <option value="2">Two</option>
       <option value="3">Three</option>
+    </select>
+
+    <!-- lista: többszörös kijelölés multiple -->
+    <select
+      class="form-select mt-3"
+      aria-label="Default select example"
+      v-model="listaTobbszoros"
+      multiple
+      size="6"
+    >
+      <option value="Kifli">Kifli</option>
+      <option value="Zsemle">Zsemle</option>
+      <option value="Vaj">Vaj</option>
+      <option value="Szalámi">Szalámi</option>
+      <option value="Szalonna">Szalonna</option>
+      <option value="Zsír">Zsír</option>
+      <option value="Sajt">Sajt</option>
     </select>
 
     <!-- checkbox -->
@@ -70,6 +87,7 @@ export default {
     return {
       szoveg: "szöveg",
       lista: 2,
+      listaTobbszoros: [],
       kenyer: false,
       kifli: true,
       neme: "fiú",
