@@ -1,13 +1,15 @@
 <template>
-  <div class="alert alert-danger d-flex justify-content-between m-3" role="alert"
+  <transition name="fade">
+    <div class="alert alert-danger d-flex justify-content-between m-3" role="alert"
     v-if="open"
-  >  
-  <!-- Ide jön az üzenet -->
-  <slot></slot>
-  <i class="bi bi-x-lg"
+    >  
+    <!-- Ide jön az üzenet -->
+    <slot></slot>
+    <i class="bi bi-x-lg"
     @click="onClickCloseIcon()"
-  ></i>
-</div>
+    ></i>
+  </div>
+</transition>
 </template>
 
 <script>

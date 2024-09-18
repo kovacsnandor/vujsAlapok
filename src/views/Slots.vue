@@ -32,12 +32,12 @@
   </KomponensAlert>
 
   <!-- Modal komponens -->
-  <Modal 
-    :title="'Kérdés'" 
-    :yes="'Igen'" 
+  <Modal
+    :title="'Kérdés'"
+    :yes="'Igen'"
     :no="'Ne'"
     @szovegEltuntetes="szovegEltuntet"
-    >
+  >
     <p v-if="openSzoveg">Valóban eltüntessem a szöveget?</p>
     <p v-if="!openSzoveg">Megjelenítsem a szöveget?</p>
   </Modal>
