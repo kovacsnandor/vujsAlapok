@@ -13,3 +13,5 @@ import "bootstrap"
 import "bootstrap-icons/font/bootstrap-icons.min.css"
 ```
 
+# Life cycle
+![lifecycle](lifecycle.png)
