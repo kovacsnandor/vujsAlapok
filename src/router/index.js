@@ -11,7 +11,7 @@ const router = createRouter({
     },
     {
       path: '/globallocalcomponent',
-      name: 'dinamikusKomponens',
+      name: 'globallocalcomponent',
       component: () => import('../views/GlobalLocalComponens.vue')
     },
     {
@@ -27,7 +27,7 @@ const router = createRouter({
     {
       path: '/vslot',
       name: 'vslot',
-      component: () => import('../views/Vslot.vue')
+      component: () => import('../views/VSlot.vue')
     },
     
   ]
