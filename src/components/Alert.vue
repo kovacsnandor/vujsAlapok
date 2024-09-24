@@ -1,5 +1,5 @@
 <template>
-    <div class="alert alert-danger d-flex justify-content-between my-alert-width my-3" 
+    <div class="alert alert-danger d-flex justify-content-between my-alert-width" 
         role="alert" v-if="message">
         {{message}}
         <i class="bi bi-x-lg" @click="onClickCloseButton()"></i>
@@ -25,7 +25,10 @@ export default {
 
 <style scoped>
     .my-alert-width{
-        max-width: 600px;
-        margin: 0 auto
+        width: 600px;
+        margin: 0 auto;
+        position: fixed;
+        top: 10%;
+        left:10%;
     }
 </style>
