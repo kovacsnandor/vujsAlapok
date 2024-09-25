@@ -1,8 +1,8 @@
 <template>
-  <div class="p-3">
+  <div class="p-3 my-home">
     <h1 class="my-h1">Főoldal</h1>
     <transition name="alert">
-      <Alert :message="message" @closeAlert="closeAlert" />
+      <Alert :message="message" @closeAlert="closeAlert" class="my-alert-box" />
     </transition>
     <Todos class="my-list-width" @emptyText="openAlert" />
     
@@ -38,11 +38,13 @@ export default {
 </script>
 
 <style>
+
+
 .my-list-width {
   max-width: 400px;
 }
-.my-h1{
-  position: relative;
+.my-home{
+  position: relative !important;
 }
 /* Animation helo*/
 .fade-enter-from {

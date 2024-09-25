@@ -1,26 +1,30 @@
 <template>
-  <div>
-    <div class="mb-3">
-      <input
-        type="text"
-        class="form-control"
-        v-model="newTodo"
-        @keypress.enter="addTodo()"
-        placeholder="Add a new todo..."
-      />
-    </div>
-      <transition-group tag="ul" name="list" class="list-group mt-3 my-ul" v-if="todos.length">
-        <li
-          class="list-group-item"
-          v-for="(todo, i) in todos"
-          :key="i"
-        >
+  <div class="todos">
+    <input
+      type="text"
+      class="form-control"
+      v-model="newTodo"
+      @keypress.enter="addTodo()"
+      placeholder="Add a new todo..."
+    />
+
+    <transition name="switch" mode="out-in">
+      <transition-group
+        tag="ul"
+        name="list"
+        class="list-group mt-3 my-ul"
+        v-if="todos.length"
+        appear
+      >
+        <li class="list-group-item" v-for="todo in todos" :key="todo">
           <span class="me-2 my-delete-cursor" @click="deleteTodo(todo)">
             <i class="bi bi-trash3"></i>
           </span>
           {{ todo }}
         </li>
       </transition-group>
+      <div v-else>Nincs semmi tennivaló!</div>
+    </transition>
   </div>
 </template>
 
@@ -58,7 +62,7 @@ export default {
   position: relative;
 }
 
-/* Animation helo*/
+/* Animation list*/
 .list-enter-from {
   opacity: 0;
   transform: scale(0.6);
@@ -68,18 +72,8 @@ export default {
   transform: scale(1);
 }
 .list-enter-active {
-  transition: all 2s ease;
+  transition: all 0.4s ease;
 }
-
-.list-leave-active {
-  transition: all 2s ease;
-  position: absolute;
-}
-.list-move {
-  transition: all 2s ease;
-  
-}
-
 
 .list-leave-from {
   opacity: 1;
@@ -90,4 +84,30 @@ export default {
   transform: scale(0.6);
 }
 
+.list-leave-active {
+  transition: all 0.4s ease;
+  position: absolute; /* amikor kiviszi jól csússzon fel*/
+}
+
+.list-move {
+  /* Amikor beteszi, animálva csússzon */
+  transition: all 0.5s ease;
+}
+
+/* switch */
+.switch-enter-from,
+.switch-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* nem kell, mert alapértelmezettek */
+/* .switch-enter-to, .switch-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+} */
+.switch-enter-active,
+.switch-leave-active {
+  transition: all 0.5s ease;
+}
 </style>
