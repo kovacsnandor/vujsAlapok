@@ -22,8 +22,8 @@
       <div class="modal-content">
         <div class="modal-header">
             <!-- title -->
-          <h1 class="modal-title fs-5" id="exampleModalLabel">
-            {{title}}
+          <h1 class="modal-title fs-5" id="exampleModalLabel" v-html="title">
+            
           </h1>
           <button
             type="button"

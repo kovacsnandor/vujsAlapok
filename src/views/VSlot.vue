@@ -2,9 +2,9 @@
   <h2>Vslot</h2>
   <h3>Halkártyák ({{ halSearch }})</h3>
   <!-- Hal kártyák -->
-  <div class="row row-cols-1 row-cols-md-3 g-4 my-border mt-3 m-0">
+  <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 my-border mt-3 m-0">
     <HalKartya
-      v-for="(hal, i) in halak"
+      v-for="(hal, i) in szurtHalak"
       :key="i"
       :id="hal.id"
       @reszletekModalKezeles="reszletekModalKezelo"
@@ -13,20 +13,21 @@
         <img :src="hal.image" class="card-img-top p-2" :alt="hal.title" />
       </template>
       <template v-slot:title>
-        <h5 class="card-title">{{ hal.title }}</h5>
+        <h5 class="card-title" v-html="keresJelol(hal.title)"></h5>
       </template>
     </HalKartya>
   </div>
 
   <!-- HalInfo modális ablak -->
-  <HalInfo
-    :title="kivalasztottHal.title"
-  >
+  <HalInfo :title="keresJelol(kivalasztottHal.title)">
     <!-- Ez megy a slot-ba -->
-    <img class="float-start me-1 col-12 col-sm-6 col-lg-4 p-2 my-picture"  :src="kivalasztottHal.image" :alt="kivalasztottHal.title">
-    <div v-html="textFormat"></div>    
+    <img
+      class="float-start me-1 col-12 col-sm-6 col-lg-4 p-2 my-picture"
+      :src="kivalasztottHal.image"
+      :alt="kivalasztottHal.title"
+    />
+    <div v-html="keresJelol(textFormat)"></div>
   </HalInfo>
-
 </template>
 
 <script>
@@ -44,7 +45,7 @@ export default {
   inject: ["halSearch"],
   components: {
     HalKartya,
-    HalInfo
+    HalInfo,
   },
   data() {
     return {
@@ -116,21 +117,43 @@ export default {
         return hal.id == data.id;
       })[0];
     },
+    keresJelol(text) {
+      if (this.halSearch) {
+        let what = new RegExp(this.halSearch, "gi");
+        if (text) {
+          text = text.replace(what, (match) => {
+            return `<span class="mark p-0">${match}</span>`;
+          });
+        }
+        return text;
+      } else {
+        return text;
+      }
+    },
   },
   computed: {
-    textFormat(){
-      
-      if (this.kivalasztottHal.text==null) {
-        return '<p></p>';
+    textFormat() {
+      if (this.kivalasztottHal.text == null) {
+        return "<p></p>";
       }
-      const textArray = this.kivalasztottHal.text.map((paragraph)=>{
+      const textArray = this.kivalasztottHal.text.map((paragraph) => {
         return `<p class='m-0'>${paragraph}</p>`;
+      });
+      const text = textArray.join("");
+
+      return text;
+    },
+    szurtHalak(){
+      if (!this.halSearch) {
+        return this.halak;
+      }
+      return this.halak.filter(h => {
+        return h.title.toLowerCase().includes(this.halSearch.toLowerCase()) ||
+        h.text.some(t=> t.toLowerCase().includes(this.halSearch.toLowerCase()))
       })
-      const text = textArray.join('');
-      
-      return text
     }
-  }
+  },
+
 };
 </script>
 
