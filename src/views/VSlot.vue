@@ -1,6 +1,6 @@
 <template>
   <h2>Vslot</h2>
-  <h3>Halkártyák</h3>
+  <h3>Halkártyák ({{ halSearch }})</h3>
   <!-- Hal kártyák -->
   <div class="row row-cols-1 row-cols-md-3 g-4 my-border mt-3 m-0">
     <HalKartya
@@ -41,6 +41,7 @@ class Hal {
 import HalKartya from "@/componentsHalak/HalKartya.vue";
 import HalInfo from "@/componentsHalak/HalInfo.vue";
 export default {
+  inject: ["halSearch"],
   components: {
     HalKartya,
     HalInfo
