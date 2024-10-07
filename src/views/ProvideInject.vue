@@ -22,7 +22,11 @@
       },
       provide(){
         return{
+            //Ezt a változót odaadom, bárkinek akinek kell (aki injektálja)
             // count: this.count,
+            //A count változót egy count nevű computed-ként hirdetem
+            //aminek a függősége az eredeti count változó
+            //tehát ha az változik, az injektált count is változik
             count: computed(()=>this.count)
         }
       },
