@@ -6,6 +6,7 @@ export default {
   data() {
     return {
       halSearch: null,
+      halSearchInput: null
     };
   },
   provide(){
@@ -42,9 +43,11 @@ export default {
           type="search"
           placeholder="Search"
           aria-label="Search"
-          v-model="halSearch"
+          v-model="halSearchInput"
         />
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-outline-success" type="submit"
+          @click="halSearch = halSearchInput"
+        >Search</button>
       </div>
     </nav>
 
