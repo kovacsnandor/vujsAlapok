@@ -1,6 +1,6 @@
 <template>
   <h2>Vslot</h2>
-  <h3>Halkártyák ({{ halSearch }})</h3>
+  <h3>Halkártyák ({{ searchWord }})</h3>
   <!-- Hal kártyák -->
   <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 my-border mt-3 m-0">
     <HalKartya
@@ -42,7 +42,7 @@ class Hal {
 import HalKartya from "@/componentsHalak/HalKartya.vue";
 import HalInfo from "@/componentsHalak/HalInfo.vue";
 export default {
-  inject: ["halSearch"],
+  inject: ["searchWord"],
   components: {
     HalKartya,
     HalInfo,
@@ -118,8 +118,8 @@ export default {
       })[0];
     },
     keresJelol(text) {
-      if (this.halSearch) {
-        let what = new RegExp(this.halSearch, "gi");
+      if (this.searchWord) {
+        let what = new RegExp(this.searchWord, "gi");
         if (text) {
           text = text.replace(what, (match) => {
             return `<span class="mark p-0">${match}</span>`;
@@ -144,12 +144,12 @@ export default {
       return text;
     },
     szurtHalak(){
-      if (!this.halSearch) {
+      if (!this.searchWord) {
         return this.halak;
       }
       return this.halak.filter(h => {
-        return h.title.toLowerCase().includes(this.halSearch.toLowerCase()) ||
-        h.text.some(t=> t.toLowerCase().includes(this.halSearch.toLowerCase()))
+        return h.title.toLowerCase().includes(this.searchWord.toLowerCase()) ||
+        h.text.some(t=> t.toLowerCase().includes(this.searchWord.toLowerCase()))
       })
     }
   },

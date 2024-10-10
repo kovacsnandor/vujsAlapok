@@ -33,6 +33,12 @@ const router = createRouter({
       component: () => import('../views/VSlot.vue'),
       meta: { title: 'v-slot'}
     },
+    {
+      path: '/tablazat',
+      name: 'tablazat',
+      component: () => import('../views/Tablazat.vue'),
+      meta: { title: 'v-slot'}
+    },
     
   ]
 })
