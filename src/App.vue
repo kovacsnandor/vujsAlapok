@@ -4,10 +4,10 @@ import { RouterLink, RouterView } from "vue-router";
 
 <template>
   <div class="container-fluid my-border">
-    <h1>Témakör</h1>
+    <h1>CRUD - Űrlapok</h1>
     <nav class="my-border p-4">
       <RouterLink to="/">Home</RouterLink> | 
-      <RouterLink to="/about">About</RouterLink> | 
+      <RouterLink to="/crud">CRUD műveletek</RouterLink> | 
     </nav>
     <div class="my-border p-2" >
       <RouterView />
