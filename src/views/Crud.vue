@@ -1,15 +1,63 @@
 <template>
   <div>
     <h2>Crud műveletek</h2>
-    <!--  -->
+    <!-- Táblázat -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Műveletek</th>
+          <th scope="col">Név</th>
+          <th scope="col">Született</th>
+          <th scope="col">Helység</th>
+          <th scope="col">Irányítószám</th>
+          <th scope="col">Neme</th>
+          <th scope="col">Foglalkozás</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="person in personsTransform"
+          :key="person.id"
+          @click="onClickTr(person.id)"
+          :class="{ 'table-success': selectedRowPersonId == person.id }"
+        >
+          <td class="text-nowrap">
+            <!-- törlés -->
+            <button type="button" class="btn btn-outline-danger btn-sm">
+              <i class="bi bi-trash3"></i>
+            </button>
+            <!-- módosítás -->
+            <button type="button" class="btn btn-outline-primary btn-sm ms-2">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <!-- új -->
+            <button type="button" class="btn btn-outline-success btn-sm ms-2">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </td>
+          <td>{{ person.name }}</td>
+          <td>{{ person.dateOfBird }}</td>
+          <td>{{ person.locality }}</td>
+          <td>{{ person.zipCode }}</td>
+          <td>{{ person.neme }}</td>
+          <td>{{ person.profession }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Yes-no Modal -->
+
+    <!-- CU modal -->
+
   </div>
 </template>
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      people: [
+      selectedRowPersonId: null,
+      persons: [
         {
           id: 1,
           name: "Jó Béla",
@@ -17,7 +65,7 @@ export default {
           locality: "Újszász",
           zipCode: "5052",
           neme: true,
-          professionId: 1
+          professionId: 1,
         },
         {
           id: 2,
@@ -26,7 +74,7 @@ export default {
           locality: "Szolnok",
           zipCode: "5052",
           neme: true,
-          professionId: 1
+          professionId: 3,
         },
         {
           id: 3,
@@ -35,7 +83,7 @@ export default {
           locality: "Budapest",
           zipCode: "5052",
           neme: true,
-          professionId: 1
+          professionId: 2,
         },
         {
           id: 4,
@@ -44,7 +92,7 @@ export default {
           locality: "Kecskemét",
           zipCode: "6055",
           neme: true,
-          professionId: 1
+          professionId: 2,
         },
         {
           id: 5,
@@ -53,7 +101,7 @@ export default {
           locality: "Szolnok",
           zipCode: "5052",
           neme: true,
-          professionId: 1
+          professionId: 5,
         },
         {
           id: 6,
@@ -62,7 +110,7 @@ export default {
           locality: "Újszász",
           zipCode: "5052",
           neme: true,
-          professionId: 1
+          professionId: 4,
         },
         {
           id: 7,
@@ -71,7 +119,7 @@ export default {
           locality: "Újszász",
           zipCode: "5052",
           neme: true,
-          professionId: 1
+          professionId: 2,
         },
         {
           id: 8,
@@ -80,7 +128,7 @@ export default {
           locality: "Újszász",
           zipCode: "5052",
           neme: true,
-          professionId: 1
+          professionId: 5,
         },
         {
           id: 9,
@@ -89,7 +137,7 @@ export default {
           locality: "Újszász",
           zipCode: "5052",
           neme: true,
-          professionId: 1
+          professionId: 3,
         },
         {
           id: 10,
@@ -98,36 +146,61 @@ export default {
           locality: "Újszász",
           zipCode: "5052",
           neme: true,
-          professionId: 1
+          professionId: 1,
         },
       ],
-      professions : [
+      professions: [
         {
           id: 1,
-          name: "Asztalos"
+          name: "Asztalos",
         },
         {
           id: 2,
-          name: "Villanyszerelő"
+          name: "Villanyszerelő",
         },
         {
-          id: 1,
-          name: "Programozó"
+          id: 3,
+          name: "Programozó",
         },
         {
-          id: 1,
-          name: "Könyvelő"
+          id: 4,
+          name: "Könyvelő",
         },
         {
-          id: 1,
-          name: "Kereskedő"
+          id: 5,
+          name: "Kereskedő",
         },
-      ]
-    }
-  }
-}
+      ],
+    };
+  },
+  methods: {
+    nemeString(neme) {
+      return neme ? "férfi" : "nő";
+    },
+    profesonById(professionId) {
+      return this.professions.filter((p) => p.id == professionId)[0].name;
+    },
+    onClickTr(id) {
+      this.selectedRowPersonId = id;
+    },
+  },
+  computed: {
+    personsTransform() {
+      return this.persons.map((p) => {
+        const newP = {
+          ...p,
+          neme: this.nemeString(p.neme),
+          profession: this.profesonById(p.professionId),
+        };
+        return newP;
+      });
+    },
+  },
+};
 </script>
 
-<style>
-
+<style scoped>
+.my-selected-row {
+  background-color: green !important;
+}
 </style>
