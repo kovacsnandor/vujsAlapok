@@ -23,7 +23,13 @@
         >
           <td class="text-nowrap">
             <!-- törlés -->
-            <button type="button" class="btn btn-outline-danger btn-sm">
+            <button
+              type="button"
+              class="btn btn-outline-danger btn-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#modal"
+              @click="onClickDeleteButton(person)"
+            >
               <i class="bi bi-trash3"></i>
             </button>
             <!-- módosítás -->
@@ -31,7 +37,13 @@
               <i class="bi bi-pencil"></i>
             </button>
             <!-- új -->
-            <button type="button" class="btn btn-outline-success btn-sm ms-2">
+            <button
+              type="button"
+              class="btn btn-outline-success btn-sm ms-2"
+              data-bs-toggle="modal"
+              data-bs-target="#modal"
+              @click="onClickCreate()"
+            >
               <i class="bi bi-plus-lg"></i>
             </button>
           </td>
@@ -46,16 +58,37 @@
     </table>
 
     <!-- Yes-no Modal -->
+    <Modal
+      :title="title"
+      :yes="yes"
+      :no="no"
+      :size="modalSize"
+      @yesEvent="yesEventHandling"
+    >
+      <!-- yes-no -->
+      <div v-if="(state == 'Delete')">
+        {{ messageYesNo }}
+      </div>
+      <!-- person form -->
+      <PersonForm v-if="state == 'Create' || state == 'Update'" />
+    </Modal>
 
     <!-- CU modal -->
-
   </div>
 </template>
 
 <script>
+import PersonForm from "@/components/PersonForm.vue";
 export default {
+  components: { PersonForm },
   data() {
     return {
+      title: null,
+      yes: null,
+      no: null,
+      modalSize: null,
+      state: "Read",
+      messageYesNo: null,
       selectedRowPersonId: null,
       persons: [
         {
@@ -174,6 +207,11 @@ export default {
     };
   },
   methods: {
+    deletePersonById(id) {
+      this.persons = this.persons.filter((p) => p.id != id);
+      this.state = "Read";
+    },
+
     nemeString(neme) {
       return neme ? "férfi" : "nő";
     },
@@ -182,6 +220,32 @@ export default {
     },
     onClickTr(id) {
       this.selectedRowPersonId = id;
+    },
+    onClickDeleteButton(person) {
+      this.title = "Kérdés";
+      this.yes = "Igen";
+      this.no = "Nem";
+      this.modalSize = null;
+      this.state = "Delete";
+      this.messageYesNo = `Valóban törölni akarod? Név: ${person.name}`;
+    },
+    onClickCreate() {
+      this.title = "Új személy létrehozás";
+      this.yes = "Mentés";
+      this.no = "Mégsem";
+      this.modalSize = "lg";
+      this.state = "Create";
+    },
+
+    yesEventHandling() {
+
+      if (this.state == "Delete") {
+        this.deletePersonById(this.selectedRowPersonId);
+      } else if (this.state == "Create") {
+        console.log("Create");
+      } else if (this.state == "Update") {
+        console.log("Update");
+      }
     },
   },
   computed: {
