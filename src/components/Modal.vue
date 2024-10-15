@@ -33,6 +33,7 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
+              v-if="no"
             >
               {{ no }}
             </button>
@@ -41,6 +42,7 @@
               class="btn btn-danger" 
               data-bs-dismiss="modal"
               @click="onClicYesButton()"
+              v-if="yes"
               >
               {{ yes }}
             </button>
@@ -51,8 +53,15 @@
   </template>
   
   <script>
+  
+  // import bootstrap from 'bootstrap';
   export default {
     props: ["title", "yes", "no", "size"],
+    mounted(){
+      // const modal = new bootstrap.Modal('#myModal', {
+      // keyboard: false
+      //})
+    },
     methods: {
       onClicYesButton(){
         this.$emit("yesEvent")

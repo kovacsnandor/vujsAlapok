@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Crud műveletek</h2>
+
     <!-- Táblázat -->
     <table class="table table-striped">
       <thead>
@@ -33,7 +34,13 @@
               <i class="bi bi-trash3"></i>
             </button>
             <!-- módosítás -->
-            <button type="button" class="btn btn-outline-primary btn-sm ms-2">
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm ms-2"
+              data-bs-toggle="modal"
+              data-bs-target="#modal"
+              @click="onClickUpdate(person)"
+            >
               <i class="bi bi-pencil"></i>
             </button>
             <!-- új -->
@@ -57,7 +64,7 @@
       </tbody>
     </table>
 
-    <!-- Yes-no Modal -->
+    <!--  Modal -->
     <Modal
       :title="title"
       :yes="yes"
@@ -66,19 +73,41 @@
       @yesEvent="yesEventHandling"
     >
       <!-- yes-no -->
-      <div v-if="(state == 'Delete')">
+      <div v-if="state == 'Delete'">
         {{ messageYesNo }}
       </div>
-      <!-- person form -->
-      <PersonForm v-if="state == 'Create' || state == 'Update'" />
+      <!-- Form person -->
+      <PersonForm 
+        v-if="state == 'Create' || state == 'Update'" 
+        :person="person"
+        :professions="professions"
+        @savePerson="savePersonHandler"
+      />
     </Modal>
-
-    <!-- CU modal -->
   </div>
 </template>
 
 <script>
 import PersonForm from "@/components/PersonForm.vue";
+class Person {
+  constructor(
+    id = null,
+    name = null,
+    dateOfBird = null,
+    locality = null,
+    zipCode = null,
+    neme = null,
+    professionId = null
+  ) {
+    this.id = id;
+    this.name = name;
+    this.dateOfBird = dateOfBird;
+    this.locality = locality;
+    this.zipCode = zipCode;
+    this.neme = neme;
+    this.professionId = professionId;
+  }
+}
 export default {
   components: { PersonForm },
   data() {
@@ -90,6 +119,7 @@ export default {
       state: "Read",
       messageYesNo: null,
       selectedRowPersonId: null,
+      person: new Person(this.uid()),
       persons: [
         {
           id: 1,
@@ -231,14 +261,21 @@ export default {
     },
     onClickCreate() {
       this.title = "Új személy létrehozás";
-      this.yes = "Mentés";
+      this.yes = null;
       this.no = "Mégsem";
       this.modalSize = "lg";
       this.state = "Create";
+      this.person = new Person( this.uid())
+    },
+    onClickUpdate() {
+      this.title = "Személy módosítás";
+      this.yes = null;
+      this.no = "Mégsem";
+      this.modalSize = "lg";
+      this.state = "Update";
     },
 
     yesEventHandling() {
-
       if (this.state == "Delete") {
         this.deletePersonById(this.selectedRowPersonId);
       } else if (this.state == "Create") {
@@ -246,6 +283,14 @@ export default {
       } else if (this.state == "Update") {
         console.log("Update");
       }
+    },
+
+    uid(){
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    },
+    savePersonHandler(person){
+      this.person = person;
+      console.log("savePerson", this.person);
     },
   },
   computed: {
