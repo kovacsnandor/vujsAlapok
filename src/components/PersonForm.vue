@@ -1,9 +1,9 @@
 <template>
-  <p>{{ personForm }}</p>
-  <p>{{ formattedDate }}</p>
-  <form class="row g-3" @submit.prevent="onClickSaveButton()">
+  <!-- <p>{{ personForm }}</p>
+  <p>{{ formattedDate }}, {{ personForm.dateOfBird }}</p> -->
+  <form class="row g-4 p-3" @submit.prevent="onClickSaveButton()" novalidate>
     <!-- Név -->
-    <div class="col-md-7 d-flex align-items-center">
+    <div class="col-lg-7 d-flex align-items-center">
       <label for="name" class="form-label m-0">Név:</label>
       <input
         type="text"
@@ -14,7 +14,7 @@
       />
     </div>
     <!-- Született -->
-    <div class="col-md-5 d-flex align-items-center">
+    <div class="col-lg-5 d-flex align-items-center">
       <label for="dateOfBird" class="form-label m-0 text-nowrap"
         >Születési dátum:</label
       >
@@ -28,7 +28,7 @@
     </div>
 
     <!-- Helység -->
-    <div class="col-md-6 d-flex align-items-center">
+    <div class="col-sm-12 col-lg-6 d-flex align-items-center">
       <label for="locality" class="form-label m-0">Helység:</label>
       <input
         type="text"
@@ -40,7 +40,7 @@
     </div>
 
     <!-- Irányítószám -->
-    <div class="col-md-3 d-flex align-items-center">
+    <div class="col-sm-12 col-lg-3 d-flex align-items-center">
       <label for="zipCode" class="form-label m-0">Irányítószám:</label>
       <input
         type="text"
@@ -53,7 +53,7 @@
     </div>
 
     <!-- Neme -->
-    <div class="col-md-3 d-flex align-items-center">
+    <div class="col-sm-12 col-lg-3 d-flex align-items-center">
       <div class="form-check">
         <input
           class="form-check-input"
@@ -78,7 +78,7 @@
       </div>
     </div>
     <!-- Foglalkozás -->
-    <div class="col-md-6 d-flex align-items-center">
+    <div class="col-sm-12 col-lg-6 d-flex align-items-center">
       <label for="profession" class="form-label m-0">Foglalkozás:</label>
       <select
         class="form-select ms-2"
@@ -98,7 +98,7 @@
     </div>
 
     <!-- Mentés -->
-    <button type="submit" class="btn btn-success">
+    <button type="submit" class="btn btn-success btn-lg">
       Mentés
     </button>
   </form>
@@ -117,6 +117,9 @@ export default {
   computed: {
     formattedDate: {
       get() {
+        if (!this.personForm.dateOfBird) {
+          return null;
+        }
         return dateFormat(this.personForm.dateOfBird,'yyyy-mm-dd');
 
         // return this.personForm.dateOfBird

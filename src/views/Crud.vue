@@ -293,6 +293,7 @@ export default {
     yesEventHandling() {
       if (this.state == "Delete") {
         this.deletePersonById(this.selectedRowPersonId);
+        this.modal.hide();
       } else if (this.state == "Create") {
         console.log("Create");
       } else if (this.state == "Update") {

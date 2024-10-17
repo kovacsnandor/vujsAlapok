@@ -41,7 +41,6 @@
           <button
             type="button"
             class="btn btn-danger"
-            data-bs-dismiss="modal"
             @click="onClicYesButton()"
             v-if="yes"
           >
