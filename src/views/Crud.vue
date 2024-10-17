@@ -77,8 +77,8 @@
         {{ messageYesNo }}
       </div>
       <!-- Form person -->
-      <PersonForm 
-        v-if="state == 'Create' || state == 'Update'" 
+      <PersonForm
+        v-if="state == 'Create' || state == 'Update'"
         :personForm="person"
         :professions="professions"
         @savePerson="savePersonHandler"
@@ -97,7 +97,7 @@ class Person {
     dateOfBird = null,
     locality = null,
     zipCode = null,
-    neme = null,
+    neme = true,
     professionId = null
   ) {
     this.id = id;
@@ -111,10 +111,12 @@ class Person {
 }
 export default {
   components: { PersonForm },
-  mounted(){
+  mounted() {
     this.modal = new bootstrap.Modal("#modal", {
       keyboard: false,
     });
+
+    
   },
   data() {
     return {
@@ -248,12 +250,12 @@ export default {
       this.persons = this.persons.filter((p) => p.id != id);
       this.state = "Read";
     },
-    createPerson(){
+    createPerson() {
       this.persons.push(this.person);
-      this.person= new Person(this.uid());
+      this.person = new Person(this.uid());
     },
-    updatePerson(){
-      const index = this.persons.findIndex(p => p.id == this.person.id)
+    updatePerson() {
+      const index = this.persons.findIndex((p) => p.id == this.person.id);
       this.persons[index] = this.person;
     },
     nemeString(neme) {
@@ -279,7 +281,7 @@ export default {
       this.no = "Mégsem";
       this.modalSize = "lg";
       this.state = "Create";
-      this.person = new Person( this.uid())
+      this.person = new Person(this.uid());
     },
     onClickUpdate(person) {
       this.title = "Személy módosítás";
@@ -300,18 +302,17 @@ export default {
         console.log("Update");
       }
     },
-    savePersonHandler(person){
+    savePersonHandler(person) {
       this.person = person;
-      if (this.state == 'Create') {
+      if (this.state == "Create") {
         this.createPerson();
-        
       } else {
         this.updatePerson();
       }
       this.modal.hide();
     },
-    uid(){
-        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    uid() {
+      return Date.now().toString(36) + Math.random().toString(36).substr(2);
     },
   },
   computed: {
