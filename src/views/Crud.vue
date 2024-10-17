@@ -58,7 +58,7 @@
           <td>{{ person.dateOfBird }}</td>
           <td>{{ person.locality }}</td>
           <td>{{ person.zipCode }}</td>
-          <td>{{ person.neme }}</td>
+          <td>{{ person.nemeString }}</td>
           <td>{{ person.profession }}</td>
         </tr>
       </tbody>
@@ -79,7 +79,7 @@
       <!-- Form person -->
       <PersonForm 
         v-if="state == 'Create' || state == 'Update'" 
-        :person="person"
+        :personForm="person"
         :professions="professions"
         @savePerson="savePersonHandler"
       />
@@ -89,6 +89,7 @@
 
 <script>
 import PersonForm from "@/components/PersonForm.vue";
+import * as bootstrap from "bootstrap";
 class Person {
   constructor(
     id = null,
@@ -110,8 +111,14 @@ class Person {
 }
 export default {
   components: { PersonForm },
+  mounted(){
+    this.modal = new bootstrap.Modal("#modal", {
+      keyboard: false,
+    });
+  },
   data() {
     return {
+      modal: null,
       title: null,
       yes: null,
       no: null,
@@ -241,7 +248,14 @@ export default {
       this.persons = this.persons.filter((p) => p.id != id);
       this.state = "Read";
     },
-
+    createPerson(){
+      this.persons.push(this.person);
+      this.person= new Person(this.uid());
+    },
+    updatePerson(){
+      const index = this.persons.findIndex(p => p.id == this.person.id)
+      this.persons[index] = this.person;
+    },
     nemeString(neme) {
       return neme ? "férfi" : "nő";
     },
@@ -267,12 +281,13 @@ export default {
       this.state = "Create";
       this.person = new Person( this.uid())
     },
-    onClickUpdate() {
+    onClickUpdate(person) {
       this.title = "Személy módosítás";
       this.yes = null;
       this.no = "Mégsem";
       this.modalSize = "lg";
       this.state = "Update";
+      this.person = person;
     },
 
     yesEventHandling() {
@@ -284,13 +299,18 @@ export default {
         console.log("Update");
       }
     },
-
-    uid(){
-        return Date.now().toString(36) + Math.random().toString(36).substr(2);
-    },
     savePersonHandler(person){
       this.person = person;
-      console.log("savePerson", this.person);
+      if (this.state == 'Create') {
+        this.createPerson();
+        
+      } else {
+        this.updatePerson();
+      }
+      this.modal.hide();
+    },
+    uid(){
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
     },
   },
   computed: {
@@ -298,7 +318,7 @@ export default {
       return this.persons.map((p) => {
         const newP = {
           ...p,
-          neme: this.nemeString(p.neme),
+          nemeString: this.nemeString(p.neme),
           profession: this.profesonById(p.professionId),
         };
         return newP;

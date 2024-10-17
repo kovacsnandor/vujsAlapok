@@ -1,4 +1,6 @@
 <template>
+  <p>{{ personForm }}</p>
+  <p>{{ formattedDate }}</p>
   <form class="row g-3" @submit.prevent="onClickSaveButton()">
     <!-- Név -->
     <div class="col-md-7 d-flex align-items-center">
@@ -7,7 +9,7 @@
         type="text"
         class="form-control ms-2"
         id="name"
-        v-model="person.name"
+        v-model="personForm.name"
         required
       />
     </div>
@@ -20,21 +22,36 @@
         type="date"
         class="form-control ms-2"
         id="dateOfBird"
-        v-model="person.dateOfBird"
+        v-model="formattedDate"
         required
       />
     </div>
-    <!-- Irányítószám -->
-    <div class="col-md-3 d-flex align-items-center">
-      <label for="locality" class="form-label m-0">Irányítószám:</label>
+
+    <!-- Helység -->
+    <div class="col-md-6 d-flex align-items-center">
+      <label for="locality" class="form-label m-0">Helység:</label>
       <input
         type="text"
         class="form-control ms-2"
         id="locality"
-        v-model="person.locality"
+        v-model="personForm.locality"
         required
       />
     </div>
+
+    <!-- Irányítószám -->
+    <div class="col-md-3 d-flex align-items-center">
+      <label for="zipCode" class="form-label m-0">Irányítószám:</label>
+      <input
+        type="text"
+        class="form-control ms-2"
+        id="zipCode"
+        v-model="personForm.zipCode"
+        pattern="^\d{4}$"
+        
+      />
+    </div>
+
     <!-- Neme -->
     <div class="col-md-3 d-flex align-items-center">
       <div class="form-check">
@@ -43,7 +60,8 @@
           type="radio"
           name="neme"
           id="man"
-          v-model="person.neme"
+          :value="true"
+          v-model="personForm.neme"
         />
         <label class="form-check-label" for="man"> Férfi </label>
       </div>
@@ -53,7 +71,8 @@
           type="radio"
           name="neme"
           id="woman"
-          v-model="person.neme"
+          :value="false"
+          v-model="personForm.neme"
         />
         <label class="form-check-label" for="woman"> Nő </label>
       </div>
@@ -64,13 +83,14 @@
       <select
         class="form-select ms-2"
         aria-label="Default select example"
-        v-model="person.professionId"
+        v-model="personForm.professionId"
         id="profession"
+        required
       >
         <option
           v-for="profession in professions"
           :key="profession.id"
-          value="profession.id"
+          :value="profession.id"
         >
           {{ profession.name }}
         </option>
@@ -78,20 +98,34 @@
     </div>
 
     <!-- Mentés -->
-    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+    <button type="submit" class="btn btn-success">
       Mentés
     </button>
   </form>
 </template>
 
 <script>
+import dateFormat, { masks } from "dateformat";
 export default {
-  props: ["person", "professions"],
+  props: ["personForm", "professions"],
+  emits: ["savePerson"],
   methods: {
     onClickSaveButton() {
-      this.$emit("savePerson", this.person);
+      this.$emit("savePerson", this.personForm);
     },
   },
+  computed: {
+    formattedDate: {
+      get() {
+        return dateFormat(this.personForm.dateOfBird,'yyyy-mm-dd');
+
+        // return this.personForm.dateOfBird
+      },
+      set(newValue) {
+        this.personForm.dateOfBird = dateFormat(newValue,'yyyy.mm.dd');
+      }
+    }
+  }
 };
 </script>
 

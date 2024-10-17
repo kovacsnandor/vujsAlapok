@@ -1,74 +1,81 @@
 <template>
-    <!-- Modal -->
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="modal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
     <div
-      class="modal fade"
-      id="modal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
+      class="modal-dialog modal-dialog-centered"
+      :class="{
+        'modal-xl': size == 'xl',
+        'modal-lg': size == 'lg',
+        'modal-sm': size == 'sm',
+      }"
     >
-      <div class="modal-dialog modal-dialog-centered"
-        :class="{
-          'modal-xl': size == 'xl',
-          'modal-lg': size == 'lg',
-          'modal-sm': size == 'sm',
-        }"
-      >
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">{{ title }}</h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <!-- Modal body -->
-          <div class="modal-body">
-            <slot></slot>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-              v-if="no"
-            >
-              {{ no }}
-            </button>
-            <button 
-              type="button" 
-              class="btn btn-danger" 
-              data-bs-dismiss="modal"
-              @click="onClicYesButton()"
-              v-if="yes"
-              >
-              {{ yes }}
-            </button>
-          </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{ title }}</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <slot></slot>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            v-if="no"
+          >
+            {{ no }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-bs-dismiss="modal"
+            @click="onClicYesButton()"
+            v-if="yes"
+          >
+            {{ yes }}
+          </button>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
-  
-  // import bootstrap from 'bootstrap';
-  export default {
-    props: ["title", "yes", "no", "size"],
-    mounted(){
-      // const modal = new bootstrap.Modal('#myModal', {
-      // keyboard: false
-      //})
+import * as bootstrap from "bootstrap";
+// import Modal from 'bootstrap/js/dist/modal';
+export default {
+  props: ["title", "yes", "no", "size"],
+  emits: ["yesEvent"],
+  mounted() {
+    const modal = new bootstrap.Modal("#modal", {
+      keyboard: false,
+    });
+
+    const myModalEl = document.getElementById("modal");
+    myModalEl.addEventListener("hidden.bs.modal", (event) => {
+      console.log("ablak becsuk");
+    });
+  },
+  methods: {
+    onClicYesButton() {
+      this.$emit("yesEvent");
     },
-    methods: {
-      onClicYesButton(){
-        this.$emit("yesEvent")
-      }
-    }
-  };
-  </script>
+  },
+};
+</script>
   
   <style>
-  </style>
+</style>

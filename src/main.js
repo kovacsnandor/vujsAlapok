@@ -10,14 +10,15 @@ import router from './router'
 //Bootstrap: css, js
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
+// import * as bootstrap from "bootstrap/dist/js/bootstrap.js";
 //Icons: css
 import "bootstrap-icons/font/bootstrap-icons.min.css"
 
 //Globális komponensek importja
 import Modal from "./components/Modal.vue"
 
-
 const app = createApp(App)
+
 
 app.use(createPinia())
 app.use(router)
