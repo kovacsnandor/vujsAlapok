@@ -296,10 +296,7 @@ export default {
       if (this.state == "Delete") {
         this.deletePersonById(this.selectedRowPersonId);
         this.modal.hide();
-      } else if (this.state == "Create") {
-        console.log("Create");
-      } else if (this.state == "Update") {
-        console.log("Update");
+        this.state = "Read";
       }
     },
     savePersonHandler(person) {
@@ -310,6 +307,7 @@ export default {
         this.updatePerson();
       }
       this.modal.hide();
+      this.state = "Read";
     },
     uid() {
       return Date.now().toString(36) + Math.random().toString(36).substr(2);
