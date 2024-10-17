@@ -1,7 +1,7 @@
 <template>
   <!-- <p>{{ personForm }}</p>
   <p>{{ formattedDate }}, {{ personForm.dateOfBird }}</p> -->
-  <form class="row g-4 p-3" @submit.prevent="onClickSaveButton()" novalidate>
+  <form class="row g-4 p-3" @submit.prevent="onClickSaveButton()">
     <!-- Név -->
     <div class="col-lg-7 d-flex align-items-center">
       <label for="name" class="form-label m-0">Név:</label>
