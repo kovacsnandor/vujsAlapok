@@ -2,9 +2,11 @@
 import { RouterLink, RouterView } from "vue-router";
 export default {
   errorCaptured(error,compInst,errorInfo) {
-    console.log("error: ", error);
-    console.log("compInst: ", compInst);
-    console.log("errorInfo: ", errorInfo);
+   alert("Error");
+
+    // console.log("error: ", error);
+    // console.log("compInst: ", compInst);
+    // console.log("errorInfo: ", errorInfo);
   }
 }
 </script>
